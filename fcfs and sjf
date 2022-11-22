@@ -1,0 +1,122 @@
+import java.util.*;
+import static java.lang.System.*; 
+
+public class Main
+{
+    	public static void main(String [] args)
+	{
+	int n,i,j,k;
+	Scanner sc= new Scanner(System.in);
+	System.out.println("Enter the Number of process you want to enter\n");
+	n=sc.nextInt();
+	String task_id [] = new String [n];
+	int arrival_time []= new int[n];
+	int burst_time []= new int[n];
+	int scheduled_time[]= new int[n];
+	int total_time[] =new int[n];
+	int waiting_time[]=new int[n];
+	int priority[]=new int[n];
+	
+	
+			
+			j=0;k=0;
+			
+			for(i=0;i<n;i++)
+			{
+				out.println("Enter the Task_id");
+				task_id [i]=sc.next();
+				
+				out.println("Enter the arrival_time");
+				arrival_time [i]=sc.nextInt();
+				
+				out.println("Enter the burst_time");
+				burst_time [i]=sc.nextInt();
+			}
+			System.out.println("Process Details\n");
+			for(i=0;i<n;i++)
+			{
+			System.out.println(task_id[i]+"\t"+arrival_time[i]+"\t"+burst_time[i]+"\t");
+			}
+		//FCFS Scheduling Code
+			int temp=0;
+	        String temp1;
+		for(i=0;i<n-1;i++)
+		{
+			for(j=i+1;j<n;j++)
+			{
+				if(arrival_time[i]>arrival_time[j])
+				{
+					temp=arrival_time[j];
+					arrival_time[j]=arrival_time[i];
+					arrival_time[i]=temp;
+					
+					temp=burst_time[j];
+					burst_time[j]=burst_time[i];
+					burst_time[i]=temp;
+					
+					temp1=task_id[j];
+					task_id[j]=task_id[i];
+					task_id[i]=temp1;
+				}
+			}
+		}
+			j=0;
+			k=0;
+		for(i=0;i<n;i++)
+		{
+			j=burst_time[i];
+				scheduled_time[i]=k;
+				k=j+k;
+				waiting_time[i]=scheduled_time[i]-arrival_time[i];
+				total_time[i]=waiting_time[i]+burst_time[i];
+		}
+		    System.out.println("Process Details after fcfs scheduling\n");
+		    System.out.println("ID\tAT\tBT\tST\tWT\tTT");
+			for(i=0;i<n;i++)
+			{
+			System.out.println(task_id[i]+"\t"+arrival_time[i]+"\t"+burst_time[i]+"\t"+scheduled_time[i]+"\t"+waiting_time[i]+"\t"+total_time[i]);
+			}
+		//SJF Scheduling Code
+		
+		for(i=0;i<n-1;i++)
+		{
+			for(j=i+1;j<n;j++)
+			{
+				if(burst_time[i]>burst_time[j])
+				{
+					temp=arrival_time[j];
+					arrival_time[j]=arrival_time[i];
+					arrival_time[i]=temp;
+					
+					temp=burst_time[j];
+					burst_time[j]=burst_time[i];
+					burst_time[i]=temp;
+					
+					temp1=task_id[j];
+					task_id[j]=task_id[i];
+					task_id[i]=temp1;
+				}
+			}
+		}
+			j=0;
+			k=0;
+		for(i=0;i<n;i++)
+		{
+			j=burst_time[i];
+				scheduled_time[i]=k;
+				k=j+k;
+				
+				waiting_time[i]=scheduled_time[i]-arrival_time[i];
+				total_time[i]=waiting_time[i]+burst_time[i];
+		}
+	
+	
+	System.out.println("Process Details after SJF scheduling\n");
+	System.out.println("ID\tAT\tBT\tST\tWT\tTT");
+			for(i=0;i<n;i++)
+			{
+			System.out.println(task_id[i]+"\t"+arrival_time[i]+"\t"+burst_time[i]+"\t"+scheduled_time[i]+"\t"+waiting_time[i]+"\t"+total_time[i]);
+			}		
+	}
+	}
+	
